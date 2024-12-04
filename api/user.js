@@ -33,7 +33,7 @@ export function updateInfo(data) {
  * @param data object 用户账号密码
  */
 export function loginH5(data) {
-	return request.post("auth/login", data, {
+	return request.post("login", data, {
 		noAuth: true
 	});
 }

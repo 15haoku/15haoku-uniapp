@@ -153,7 +153,7 @@
 		methods: {
 			init() {
 				this.text = this.explain
-				this.getPictrue();
+				// this.getPictrue();
 				this.$nextTick(() => {
 					this.$parent.$emit('ready', this)
 				})
@@ -293,7 +293,7 @@
 				this.moveBlockBackgroundColor = '#fff'
 				this.iconColor = '#000'
 				this.iconClass = 'icon-right'
-				this.getPictrue()
+				// this.getPictrue()
 				this.isEnd = false
 				setTimeout(() => {
 					this.transitionWidth = ''

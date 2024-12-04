@@ -117,7 +117,7 @@
 				that.$Cache.set('MP_VERSION_ISNEW', false)
 			}
 			// #endif
-			that.getConfigData()
+			// that.getConfigData()
 		},
 		onShow() {
 			let that = this
