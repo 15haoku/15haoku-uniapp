@@ -85,14 +85,16 @@ function baseRequest(url, method, data, {
 			header: header,
 			data: data || {},
 			success: (res) => {
-				if (res.data && res.data.encode) {
-					try
-					{
-						res.data = JSON.parse(decompress(res.data.data));
-					}catch(e){
-						res.data = decompress(decodeURI(res.data.data));
-					}
-				}
+				// if (res.data && res.data.encode) {
+				// 	try
+				// 	{
+				// 		res.data = JSON.parse(decompress(res.data.data));
+				// 	}catch(e){
+				// 		console.log(e)
+				// 		res.data = decompress(decodeURI(res.data.data));
+				// 	}
+				// }
+				
 				if (noVerify)
 					reslove(res.data, res);
 				else if (res.data.status == 200)

@@ -478,7 +478,7 @@ export default {
 		this.diyId = options.diyId || 0;
 		this.preview = options.time ? true : false;
 		// #ifdef APP-PLUS
-		that.appVersionConfig(); //APP版本检测
+		// that.appVersionConfig(); //APP版本检测
 		// #endif
 		that.$nextTick(function() {
 			uni.getSystemInfo({

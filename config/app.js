@@ -14,8 +14,8 @@ let VUE_APP_WS_URL = `ws://${location.hostname}?type=user`
 let openPlantGrass = '-openPlantGrass-'
 
 // 网络接口修改此字符 小程序域名要求https
-// let httpApi = 'http://192.168.31.106:8324' //测试
-let httpApi = 'https://mer1.crmeb.net' //生产
+// let httpApi = 'http://127.0.0.1:8000' //测试
+let httpApi = 'http://47.242.104.247:8001' //生产 
 
 // 聊天接口修改此字符 小程序聊天要求wss 例如：wss://mer.crmeb.net
 // let wsApi = 'ws://192.168.3.20:8324'

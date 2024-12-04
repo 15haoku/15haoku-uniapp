@@ -14,8 +14,8 @@
 				<div class="whiteBg" v-if="formItem === 1">
 					<view class="login_title">
 						<view class="title_h">{{current==0 ? "账号登录" : "手机号登录"}}</view>
-						<view class="title_info" v-if="current==1">首次登录会自动注册</view>
-						<view class="title_info" v-else>没有账号？<text @click="formItem = 2">立即注册</text></text></view>
+						<view class="title_info" v-if="current==1"></view>
+						<view class="title_info" v-else>没有账号？<text @click="goToRegistration">立即注册</text></text></view>
 					</view>
 					<!--账号登录-->
 					<div class="list" :hidden="current !== 0">
@@ -25,7 +25,7 @@
 							</div>
 							<div class="item">
 								<input type="password" placeholder="填写登录密码" placeholder-class="placeholder" v-model="password" required />
-								<navigator class="forgetPwd" hover-class="none" url="/pages/users/retrievePassword/index">
+								<navigator class="forgetPwd" hover-class="none" @click="goToPasswordRecovery">
 									忘记密码
 								</navigator>
 							</div>
@@ -197,7 +197,7 @@
 	} from "@/utils/validate";
 	import {
 		getLogo,
-		getconfig,
+		// getconfig,
 		getVersion
 	} from "@/api/public";
 	import {
@@ -274,7 +274,7 @@
 			});
 		},
 		mounted: function() {
-			this.getVersion();
+			// this.getVersion();
 		},
 		onReady(){
 			let that = this
@@ -760,10 +760,10 @@
 					title: '请勾选用户协议与隐私政策'
 				});
 				loginH5({
-						auth_token: uni.getStorageSync('auth_token'),
-						account: that.account,
+						// auth_token: uni.getStorageSync('auth_token'),
+						username: that.account,
 						password: that.password,
-						spread: that.$Cache.get("spread")
+						// spread: that.$Cache.get("spread")
 					})
 					.then(({
 						data
@@ -771,11 +771,11 @@
 						const backUrl = that.$Cache.get(BACK_URL) || "/pages/index/index";
 						that.$Cache.clear(BACK_URL);
 						that.$store.commit("LOGIN", {
-							'token': data.token,
-							'time': data.exp
+							'token': data.access,
+							'time': 1
 						});
-						that.$store.commit("SETUID", data.user.uid);
-						that.$store.commit('UPDATE_USERINFO', data.user);
+						that.$store.commit("SETUID", 16666);
+						that.$store.commit('UPDATE_USERINFO', 16666);
 
 						let method
 						let indexPat = ['/pages/index/index', '/pages/order_addcart/order_addcart', '/pages/goods_cate/goods_cate',
@@ -797,6 +797,7 @@
 						});						
 					})
 					.catch(e => {
+						console.log(e)
 						that.$util.Tips({
 							title: e
 						});
@@ -823,7 +824,13 @@
 					title: '请勾选用户协议与隐私政策'
 				});
 				that.$refs.verify.show();
-			}
+			},
+			goToRegistration() {
+				window.location.href = 'https://www.ryuucoltd.com/xamember/reg.php';
+			},
+			goToPasswordRecovery() {
+				window.location.href = 'https://www.ryuucoltd.com/xamember/getpassword.php';
+			},
 		}
 	};
 </script>
