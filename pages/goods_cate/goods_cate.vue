@@ -1,52 +1,86 @@
-<template>
+d<template>
 	<view>
-		<skeleton :show="showSkeleton" :isNodes="isNodes" ref="skeleton" loading="chiaroscuro" selector="skeleton"
-			bgcolor="#FFF"></skeleton>
-		<view class='productSort' :style="{visibility: showSkeleton ? 'hidden' : 'visible', height: winHeight+ 'px'  }">
-			<view class='header acea-row row-center-wrapper'>
-				<navigator url="/pages/columnGoods/goods_search/index" class='acea-row row-between-wrapper input skeleton-rect' hover-class="none">
-					<text class='iconfont icon-sousuo'></text>
-					<view class="input-box">点击搜索商品信息</view>
-				</navigator>
-			</view>
-			<view class="con-box" :style="viewColor">	
-				<view class='aside'>	
-					<scroll-view scroll-y="true" style="height: 100%; overflow: hidden;" scroll-with-animation='true'>
-						<view v-for="(item,index) in productList">
-							<view class='item acea-row row-center-wrapper' :class='index==navActive?"on":""' v-if='item.children && item.children.length > 0'
-							 :key="item.store_category_id" @click='tap(item,index)' :id='"sort"+index'><text class="item_text skeleton-rect">{{item.cate_name}}{{pid}}</text>
-							 </view>
-						</view>
-					</scroll-view>
-				</view>
-				<view class='conter'>
-					<scroll-view scroll-y="true" style="height: 100%; overflow: hidden;" scroll-with-animation='true'>
-						<view>
-							<view class='listw' v-for="(item,index) in cateList" :key="item.store_category_id">
-								<view class='title acea-row'>
-									<view v-if="hotList.length > 0 && navActive == 0" class='name skeleton-rect'>
-										<image class="list_title" :src="domain+'/static/diy/recommend_cate'+keyColor+'.png'"></image>
+		
+		<view class='site'>
+			<view>
+				<view class="navbar">
+					<view class="body">
+						<view class="header">
+							<view><span>站点</span></view>
+							<view class="badge">
+								<view class="uni-badge--x">
+									<view class="noticeIcon">
+										<img src="/static/images/user_remind.png" style="width: 21px; height: 21px;" draggable="false">
 									</view>
-									<view v-else class='name skeleton-rect'>{{item.cate_name}}</view>					
-								</view>
-								<view class='list acea-row'>
-									<block v-for="(itemn,indexn) in item.children" :key="itemn.store_category_id">				
-										<navigator hover-class='none' :url="'/pages/columnGoods/goods_list/index?id='+itemn.store_category_id+'&title='+itemn.cate_name"
-										 class='item acea-row row-column row-middle'>
-											<view class='picture skeleton-rect'>
-												<!-- <easy-loadimage mode="widthFix" :scroll-top="scrollTop" :image-src="itemn.pic"></easy-loadimage> -->
-												<image mode="widthFix" :src="itemn.pic"></image>
-											</view>
-											<view class='name line1'>{{itemn.cate_name}}</view>
-										</navigator>
-									</block>
 								</view>
 							</view>
 						</view>
-						<view :style='"height:"+(height-300)+"rpx;"'></view>
-					</scroll-view>
+					</view>
+				</view>
+				<view class="navbarEmpty">
+					<view class="body"></view>
 				</view>
 			</view>
+			<view class="n-header">
+				<view class="input">
+					<view class="search">
+						<img src="/static/images/index_search.png" style="width: 22px;height: 22px;margin-right: 6px;" draggable="false">
+					</view>
+					<uni-view class="text-line-1" style="max-width: 85%;">输入关键词，商品ID或网址</uni-view>
+				</view>
+			</view>
+			<view class="z-paging-content z-paging-content-full z-paging-reached-top">
+				<view class="zp-view-super zp-scroll-view-super">
+					<view class="zp-scroll-view-container">
+						<view class="zp-scroll-view zp-scroll-view-absolute">
+							<view class="zp-scroll-view">
+								<view class="zp-scroll-view" style="overflow: hidden auto;">
+									<view class="uni-scroll-view-content">
+										
+										<view class="zp-paging-container">
+											<view class="zp-paging-container" :style="viewColor">	
+												<view class="zp-paging-container-content">
+													<view class="scroll_view">
+														<view class="content">
+															<view class="item" id="site_mercari">
+																<view class="imgBox">
+																	<view class="image">
+																		<img src="/static/images/mercari.png" class="imageBox-image" draggable="false">
+																	</view>
+																	<view class="introduce">日本最大的闲置交易平台</view>
+																</view>
+															</view>
+															<view class="item" id="site_yahu">
+																<view class="imgBox">
+																	<view class="image">
+																		<img src="/static/images/yahu.png" class="imageBox-image" draggable="false">
+																	</view>
+																	<view class="introduce">雅虎旗下的二手交易平台</view>
+																</view>
+															</view>
+															<view class="item" id="site_junhe">
+																<view class="imgBox">
+																	<view class="image">
+																		<img src="/static/images/junhe.png" class="imageBox-image" draggable="false">
+																	</view>
+																	<view class="introduce">二次元爱好者的天堂</view>
+																</view>
+															</view>
+														</view>
+													</view>
+												</view>
+											</view>
+										</view>
+										
+									</view>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+			
+			
 			<!-- #ifndef H5 -->
 			<passwordPopup></passwordPopup>
 			<!-- #endif -->
@@ -56,15 +90,6 @@
 	</view>
 </template>
 <script>
-	// +----------------------------------------------------------------------
-	// | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
-	// +----------------------------------------------------------------------
-	// | Copyright (c) 2016~2024 https://www.crmeb.com All rights reserved.
-	// +----------------------------------------------------------------------
-	// | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
-	// +----------------------------------------------------------------------
-	// | Author: CRMEB Team <admin@crmeb.com>
-	// +----------------------------------------------------------------------
 	let app = getApp();
 	import { getCategoryList } from '@/api/store.js';
 	import { getNavigation } from '@/api/public.js'
@@ -314,135 +339,213 @@
 	}
 </script>
 <style scoped lang="scss">
-	.productSort {
+	.site {
+			background-color: #fff;
+			background-image: url(/static/images/common_bg.png);
+			background-repeat: no-repeat;
+			background-size: 100% 248px;
+			height: 100dvh;
+		}
+		
+		.site .navbar {
+			background-color: rgba(0, 0, 0, 0);
+			height: 41px;
+			min-height: 41px;
+			padding-top: 0px;
+			z-index: 20;
+			position: fixed;
+			border-bottom: unset;
+			width: 100%;
+		}
+		.site .navbar .body {
+			display: block;
+			height: 41px; 
+			min-height: 41px;
+		}
+		.site .navbar .body .header{
+			width: 100%;
+		    display: flex;
+		    flex-direction: row;
+		    align-items: center;
+		    position: relative;
+		    justify-content: center;
+		    font-size: 17px;
+		    font-weight: 700;
+		    color: #333;
+			min-height: 41px;
+		}
+		.site .navbar .body .header .badge{
+			position: absolute;
+			right: 0;
 			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: center;
+			width: 26px;
+			height: 26px;
+			padding: 4px 4px 0 0;
+			margin-bottom: 4px;
+			margin-right: 13px;
+		}
+		
+		.site .navbar .body .header .uni-badge--x{
+			display: inline-block;
+			position: relative;
+		}
+		
+		.site .navbar .body .header .badge .noticeIcon{
+			background-image: url("/static/images/user_remind.png"); 
+			background-position: center center; 
+			background-size: contain; 
+			background-repeat: no-repeat;
+		}
+		.site .navbarEmpty {
+			height: 41px; 
+			min-height: 41px;
+		}
+		.site .n-header {
+			width: 100%;
+			padding: 0 14px;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			height: 43px;
+			margin-top: 8px;
+		}
+		
+		.site .n-header .input {
+			display: flex;
+			    align-items: center;
+			    background-color: rgba(51,51,51,.06);
+			    border-radius: 8px;
+			    color: #aaa;
+			    font-size: 14px;
+			    flex: 1;
+			    padding: 0 10px;
+			    border-radius: 8px;
+			    height: 100%;
+			    transition: background-color .2s ease-in-out
+		}
+		
+		.site .n-header .search {
+			width: 22px;
+			height: 22px;
+			margin-right: 6px;
+			background-image: url("/static/h5/new_images/index_search.png"); 
+			background-position: center center; 
+			background-size: contain;
+			background-repeat: no-repeat;
+		}
+		
+		
+		.site .z-paging-content {
+			margin-top: 14px;
+			position: relative;
 			flex-direction: column;
-			width: 100%;
-			.con-box {
-				flex: 1;
-				display: flex;
-				overflow: hidden;
-			}
+			overflow: hidden;
 		}
-		.productSort .header {
-			width: 100%;
-			height: 96rpx;
-			background-color: #fff;
-			border-bottom: 1rpx solid #f5f5f5;
-		}
-		.productSort .header .input {
-			width: 700rpx;
-			height: 60rpx;
-			background-color: #f5f5f5;
-			border-radius: 50rpx;
-			box-sizing: border-box;
-			padding: 0 25rpx;
-		}
-	
-		.productSort .header .input .iconfont {
-			font-size: 35rpx;
-			color: #555;
-		}
-		.productSort .header .input .placeholder {
-			color: #999;
-		}
-		.productSort .header .input .input-box {
+		
+		.site .z-paging-content-full {
 			display: flex;
-			align-items: center;
-			font-size: 26rpx;
-			height: 100%;
-			width: 597rpx;
-			color: #999999;
-		}
-		.productSort .aside {
-			background-color: #fff;
-			overflow-y: auto;
-			overflow-x: hidden;
-			width: 200rpx;
-			height: 100%;
-			overflow: hidden;
-		}
-		.productSort .aside .item {
-			height: 100rpx;
 			width: 100%;
-			font-size: 26rpx;
-			color: #424242;
+			height: 100%;
 		}
-		.productSort .aside .item_text {
-			padding-left: 20rpx;
-			overflow: hidden;
-			text-overflow: ellipsis;
-			display: -webkit-box;
-			-webkit-line-clamp: 2;
-			-webkit-box-orient: vertical;
+		
+		.site .z-paging-reached-top {
+			
 		}
-		.productSort .aside .item.on {
-			background-color: #f7f7f7;
-			border-left: 4rpx solid var(--view-theme);
-			width: 100%;
-			text-align: center;
-			color: var(--view-theme);
-			font-weight: bold;
+		
+		.site .zp-view-super  { 
+			display: flex;
+			flex-direction: row;
 		}
-		.productSort .conter {
+		
+		.site .zp-scroll-view-super {
 			flex: 1;
+			overflow: hidden;
+			position: relative;
+		}
+		.site .zp-paging-touch-view {
+			width: 100%;
 			height: 100%;
-			padding: 0 14rpx;
-			background-color: #f7f7f7;
+			position: relative;
 		}
-		.productSort .conter .listw .title {
-			height: 100rpx;
-			align-items: center;
+		
+		.site .zp-scroll-view-container {
+			position: relative;
+			height: 100%;
+			width: 100%;
 		}
-		.productSort .conter .listw .title .line {
-			width: 100rpx;
-			height: 2rpx;
-			background-color: #f0f0f0;
+		
+		.site .zp-scroll-view {
+			height: 100%;
+			width: 100%;
 		}
-		.productSort .conter .listw .title .name {
-			font-size: 28rpx;
-			color: #333;
-			margin: 0 30rpx;
-			font-weight: bold;
+		
+		.site .zp-scroll-view-absolute {
+			position: absolute;
+			top: 0;
+			left: 0;
 		}
-	  .productSort .conter .listw .title .list_title,
-	
-		.productSort .conter .listw .title uni-image,
-	
-		.productSort .conter .listw .title image{
-			width: 110rpx;
-			height: 26rpx;
-			border-radius: 0;
+		
+		
+		
+		
+		
+		
+		
+		
+		.site .scroll_view {
+			position: relative;
+			margin-top: 11px;
 		}
-		.productSort .conter .list {
+		
+		.site .content {
+			display: flex;
 			flex-wrap: wrap;
-			background: #fff;
-			border-radius: 16rpx;
-			padding-bottom: 26rpx;
+			padding: 0 13px;
+			padding-top: 1px;
 		}
-		.productSort .conter .list .item {
-			width: 174rpx;
-			margin-top: 26rpx;
+		
+		.site .item {
+			position: relative;
+		    width: calc(100% / 2 - 4px);
+		    margin-bottom: 9px;
+			margin-left: 4px;
 		}
-		.productSort .conter .list .item .picture,
-	
-		.productSort .conter uni-image,
-	
-		.productSort .conter .list .item image,
-	
-		/deep/.easy-loadimage{
-			width: 110rpx;
-			height: 110rpx;
-			border-radius: 50%;
+		
+		.site .imgBox {
+			width: 100%;
+			overflow: hidden;
+			border-radius: 8px;
+			position: relative;
 		}
-		.productSort .conter .list .item .name {
-			font-size: 24rpx;
-			color: #333;
-			height: 56rpx;
-			line-height: 56rpx;
-			width: 120rpx;
+		
+		.site .imgBox .image{
+			background-position: center center; 
+			background-size: contain; 
+			background-repeat: no-repeat;
+			width: 100%;
+			height: 100%;
+			transition: all .2s ease-in-out;
+		}
+
+		.site .imgBox .imageBox-image{
+			width: 100%;
+			height: 100%;
+		}
+		
+		.site .imgBox .introduce{
+			position: absolute;
+			top: 72px;
+			left: 0;
+			width: 100%;
+			color: #fff;
 			text-align: center;
+			font-size: 13px;
 		}
+		
+		
 		.page-footer {
 			position: fixed;
 			bottom: 0;
